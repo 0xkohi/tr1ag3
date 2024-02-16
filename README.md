@@ -7,11 +7,11 @@ For-init is a python program that helps retrieve the basic information during fo
 
 volatility2 installed and working as a cmdline > $ volatility -f ...
 
-#usage
+# Usage
 
 python3 initial_triage.py (memory dump file)
 
-##ideas of update
+# Ideas of update
 
 -make it work for both volatility 2 and 3 
 -Put the cache files of chrome,firefox,ie in the sub-folder browser 
