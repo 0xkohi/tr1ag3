@@ -1,20 +1,21 @@
-# For-init
-Data sorting tool for forensic analysis
+# Tr1ag3
+Data sorting tool for forensic memory analysis
 
-For-init is a python program that helps retrieve the basic information during forensic analysis, it requires a dump file as an input. It creates text files as outputs named after the volatility command in a folder named "result_initial_triage".
+Based on volatility commands, Tr1ag3 is a python tool that helps you to retrieve information at the beginning of a forensic memory analysis.
+It requires a memory dump file as an input. 
+It creates text files as outputs named after the volatility command in a folder named "tr1ag3-output".
 
 # Requirements
 
-volatility2 installed and working as a cmdline > $ volatility -f ...
+volatility2 or volatility3 installed and working as a cmdline > ``` $ vol.py -f {dump file} ```
 
 # Usage
 
-python3 initial_triage.py (memory dump file)
+ ```python3 tr1ag3.py {dump file} ```
 
 # Ideas of update
 
-- Put the cache files of chrome,firefox,ie in the sub-folder browser 
-- look for malicious/suspect strings and write them in a file(ie. might-be-interesting.txt)
+- Retrieve the cache files of chrome,firefox,ie 
 - create sub folder "suspicious" and use yara rules or something else to identify malicious files/scripts. Put the suspicious files in this same sub folder
 - add a requirements.txt file containing all packages necessary (volatility plugins for yara/other browser history) 
 - simplify the program
