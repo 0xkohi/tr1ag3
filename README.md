@@ -13,8 +13,8 @@ python3 initial_triage.py (memory dump file)
 
 # Ideas of update
 
--Put the cache files of chrome,firefox,ie in the sub-folder browser 
--look for malicious/suspect strings and write them in a file(ie. might-be-interesting.txt)
--create sub folder "suspicious" and use yara rules or something else to identify malicious files/scripts. Put the suspicious files in this same sub folder
--add a requirements.txt file containing all packages necessary (volatility plugins for yara/other browser history) 
--simplify the program
+- Put the cache files of chrome,firefox,ie in the sub-folder browser 
+- look for malicious/suspect strings and write them in a file(ie. might-be-interesting.txt)
+- create sub folder "suspicious" and use yara rules or something else to identify malicious files/scripts. Put the suspicious files in this same sub folder
+- add a requirements.txt file containing all packages necessary (volatility plugins for yara/other browser history) 
+- simplify the program
