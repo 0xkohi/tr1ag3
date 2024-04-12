@@ -11,7 +11,19 @@ volatility2 or volatility3 installed and working as a cmdline > ``` $ vol.py -f 
 
 # Usage
 
- ```python3 tr1ag3.py {dump file} ```
+```py
+$ python tr1ag3.py -h
+usage: tr1ag3.py [-h] -v VERSION -f FILE
+
+options:
+  -h, --help            show this help message and exit
+  -v VERSION, --version VERSION
+                        the version of volatility
+  -f FILE, --file FILE  the file to analyse
+
+
+$ python tr1ag3.py -v 3 -f dump_img
+```
 
 # Ideas of update
 
