@@ -6,7 +6,7 @@ import argparse
 
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-v', '--version', help='the version of volatility', required=True)
+    parser.add_argument('-v', '--version',type=int, help='the version of volatility', required=True)
     parser.add_argument('-f', '--file', help='the file to analyse', required=True)
 
     return parser.parse_args()
@@ -52,11 +52,11 @@ class Triage():
         if self.ver == 2:
             # Check Volatility version and get profile if needed
             profile = self.find_profile(dump_file, self.ver)
-            if profile is not None:
-                print(f"Profile found: {profile}")
-            else:
+            if profile is None:
                 print("Profile not found. Unable to proceed.")
                 return
+            
+            print(f"Profile found: {profile}")
         
         # Run each Volatility command and save output to a text file in the appropriate folder
         for command in self.commands:
