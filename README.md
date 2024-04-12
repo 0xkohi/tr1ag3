@@ -10,8 +10,7 @@ It creates text files as outputs named after the volatility command in a folder 
 volatility2 or volatility3 installed and working as a cmdline > ``` $ vol.py -f {dump file} ```
 
 # Usage
-
-```py
+```sh
 $ python tr1ag3.py -h
 usage: tr1ag3.py [-h] -v VERSION -f FILE
 
@@ -20,9 +19,17 @@ options:
   -v VERSION, --version VERSION
                         the version of volatility
   -f FILE, --file FILE  the file to analyse
+```
 
-
+### Default usage
+```sh
 $ python tr1ag3.py -v 3 -f dump_img
+```
+
+### Outputs
+```sh
+$ ls tr1ag3-output/
+windows.cmdline_output.txt  windows.filescan_output.txt  windows.netscan_output.txt  windows.pslist_output.txt
 ```
 
 # Ideas of update
