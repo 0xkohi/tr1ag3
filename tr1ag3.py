@@ -3,6 +3,7 @@ import os
 import sys
 import re
 import argparse
+import threading
 
 def get_args():
     parser = argparse.ArgumentParser()
@@ -33,14 +34,16 @@ class Triage():
     def run_command(self, dump_file, profile, command, output_folder):
         # Determine command format based on Volatility version
         if self.ver == 2:
-            command_format = f"vol.py -f {dump_file} --profile={profile} {command} 2>&1"
+            command_format = f"vol.py -f {dump_file} --profile={profile} {command}"
         else:
-            command_format = f"vol -f {dump_file} {command} 2>&1"
+            command_format = f"vol -f {dump_file} {command}"
 
         # Execute Volatility command
         output_file = os.path.join(output_folder, f"{command}_output.txt")
         with open(output_file, 'w') as f:
             subprocess.run(command_format, shell=True, stdout=f, stderr=subprocess.PIPE)
+
+        print(f"{command} command executed. Results saved to {output_folder}/{command}_output.txt")
         
     def init(self, dump_file):
         output_folder = "tr1ag3-output"
@@ -57,11 +60,13 @@ class Triage():
                 return
             
             print(f"Profile found: {profile}")
-        
+
+        threads = list()
         # Run each Volatility command and save output to a text file in the appropriate folder
         for command in self.commands:
-            self.run_command(dump_file, profile, command, output_folder)
-            print(f"{command} command executed. Results saved to {output_folder}/{command}_output.txt")
+            x = threading.Thread(target=self.run_command, args=(dump_file, profile, command, output_folder))
+            threads.append(x)
+            x.start()
 
 
 def main(major_version, dump_file):
