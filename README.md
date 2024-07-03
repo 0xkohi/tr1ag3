@@ -21,7 +21,7 @@ options:
 
 ### Default usage
 ```sh
-$ python tr1ag3.py -v 3 -f dump_img
+$ python tr1ag3.py -f dump_img
 ```
 
 ### Outputs
