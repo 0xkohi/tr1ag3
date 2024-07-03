@@ -7,36 +7,16 @@ import threading
 
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-v', '--version',type=int, help='the version of volatility', required=True)
     parser.add_argument('-f', '--file', help='the file to analyse', required=True)
-
     return parser.parse_args()
 
 class Triage():
-    def __init__(self, ver=3):
-        
-        if ver == 3:
-            self.commands = ["windows.cmdline", "windows.pslist", "windows.netscan", "windows.filescan"]
-        else:
-            self.commands = ["consoles", "iehistory", "pslist", "netscan", "filescan"]
-        self.ver = ver
+    def __init__(self):
+        self.commands = ["windows.cmdline", "windows.pslist", "windows.netscan", "windows.filescan"]
 
-    def find_profile(self, dump_file):
-        # Execute vol.py command to get profile (only for Volatility 2.x)
-        command = f"vol.py -f {dump_file} imageinfo"
-        result = subprocess.run(command, shell=True, capture_output=True, text=True)
-
-        # Extract the profiles
-        profile_match = re.search(r"Profile\(s\) : (.+)", result.stdout)
-        
-        return profile_match if profile_match == None else profile_match.group(1).strip().split(",")[0]
-    
-    def run_command(self, dump_file, profile, command, output_folder):
-        # Determine command format based on Volatility version
-        if self.ver == 2:
-            command_format = f"vol.py -f {dump_file} --profile={profile} {command}"
-        else:
-            command_format = f"vol -f {dump_file} {command}"
+    def run_command(self, dump_file, command, output_folder):
+        # Command format for Volatility 3
+        command_format = f"vol.py -f {dump_file} {command}"
 
         # Execute Volatility command
         output_file = os.path.join(output_folder, f"{command}_output.txt")
@@ -50,30 +30,19 @@ class Triage():
 
         # Create output folder if it doesn't exist
         os.makedirs(output_folder, exist_ok=True)
-        
-        profile = None
-        if self.ver == 2:
-            # Check Volatility version and get profile if needed
-            profile = self.find_profile(dump_file, self.ver)
-            if profile is None:
-                print("Profile not found. Unable to proceed.")
-                return
-            
-            print(f"Profile found: {profile}")
 
         threads = list()
         # Run each Volatility command and save output to a text file in the appropriate folder
         for command in self.commands:
-            x = threading.Thread(target=self.run_command, args=(dump_file, profile, command, output_folder))
+            x = threading.Thread(target=self.run_command, args=(dump_file, command, output_folder))
             threads.append(x)
             x.start()
 
-
-def main(major_version, dump_file):
-    worker = Triage(major_version)
+def main(dump_file):
+    worker = Triage()
     worker.init(dump_file)
 
 if __name__ == "__main__":
     opts = get_args()
 
-    sys.exit(main(opts.version, opts.file))
+    sys.exit(main(opts.file))

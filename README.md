@@ -7,17 +7,15 @@ It creates text files as outputs named after the volatility command in a folder 
 
 # Requirements
 
-volatility2 or volatility3 installed and working as a cmdline > ``` $ vol.py -f {dump file} ```
+volatility3 installed and working as a cmdline > ``` $ vol.py -f {dump file} ```
 
 # Usage
 ```sh
 $ python tr1ag3.py -h
-usage: tr1ag3.py [-h] -v VERSION -f FILE
+usage: tr1ag3.py [-h]  -f FILE
 
 options:
   -h, --help            show this help message and exit
-  -v VERSION, --version VERSION
-                        the version of volatility
   -f FILE, --file FILE  the file to analyse
 ```
 
@@ -34,7 +32,7 @@ windows.cmdline_output.txt  windows.filescan_output.txt  windows.netscan_output.
 
 # Ideas of update
 
-- Retrieve the cache files of chrome,firefox,ie 
-- create sub folder "suspicious" and use yara rules or something else to identify malicious files/scripts. Put the suspicious files in this same sub folder
+- Create a sub folder named "suspicious" and use yara rules or something else to identify malicious files/scripts. Put the suspicious files in this same sub folder
+Waiting for the addition of plugins to the v3:
+- Retrieve the cache files of chrome,firefox,ie and put the results in a sub-folder named "browser"
 - add a requirements.txt file containing all packages necessary (volatility plugins for yara/other browser history) 
-- simplify the program
