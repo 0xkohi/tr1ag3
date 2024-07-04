@@ -21,7 +21,7 @@ options:
 
 ### Default usage
 ```sh
-$ python tr1ag3.py -v 3 -f dump_img
+$ python tr1ag3.py -f dump_img
 ```
 
 ### Outputs
@@ -33,6 +33,8 @@ windows.cmdline_output.txt  windows.filescan_output.txt  windows.netscan_output.
 # Ideas of update
 
 - Create a sub folder named "suspicious" and use yara rules or something else to identify malicious files/scripts. Put the suspicious files in this same sub folder
-Waiting for the addition of plugins to the v3:
+
+ Waiting for the addition of plugins to the v3:
+ 
 - Retrieve the cache files of chrome,firefox,ie and put the results in a sub-folder named "browser"
 - add a requirements.txt file containing all packages necessary (volatility plugins for yara/other browser history) 
