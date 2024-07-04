@@ -32,9 +32,9 @@ windows.cmdline_output.txt  windows.filescan_output.txt  windows.netscan_output.
 
 # Ideas of update
 
-- Create a sub folder named "suspicious" and use yara rules or something else to identify malicious files/scripts. Put the suspicious files in this same sub folder
+- Create a text file "findings.txt" in the subfolder "suspicious" containing strings that could be interesting
 
  Waiting for the addition of plugins to the v3:
  
 - Retrieve the cache files of chrome,firefox,ie and put the results in a sub-folder named "browser"
-- add a requirements.txt file containing all packages necessary (volatility plugins for yara/other browser history) 
+- Add a requirements.txt file containing all packages necessary (volatility plugins for yara/other browser history) 
