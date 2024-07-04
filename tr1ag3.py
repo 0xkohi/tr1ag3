@@ -13,6 +13,7 @@ def get_args():
 class Triage():
     def __init__(self):
         self.commands = ["windows.cmdline", "windows.pslist", "windows.netscan", "windows.filescan"]
+        self.suspicious_commands = ["windows.mbrscan", "windows.mutantscan", "windows.malfind"]
 
     def run_command(self, dump_file, command, output_folder):
         # Command format for Volatility 3
@@ -27,14 +28,22 @@ class Triage():
         
     def init(self, dump_file):
         output_folder = "tr1ag3-output"
+        suspicious_folder = os.path.join(output_folder, "suspicious")
 
-        # Create output folder if it doesn't exist
+        # Create output and suspicious folders if they don't already exist
         os.makedirs(output_folder, exist_ok=True)
+        os.makedirs(suspicious_folder, exist_ok=True)
 
         threads = list()
-        # Run each Volatility command and save output to a text file in the appropriate folder
+        # Run each Volatility3 command and save output to a text file in the appropriate folder
         for command in self.commands:
             x = threading.Thread(target=self.run_command, args=(dump_file, command, output_folder))
+            threads.append(x)
+            x.start()
+
+        # Run each malware analysis related Volatility3 command and save output to a text file in the suspicious folder
+        for command in self.suspicious_commands:
+            x = threading.Thread(target=self.run_command, args=(dump_file, command, suspicious_folder))
             threads.append(x)
             x.start()
 
