@@ -4,6 +4,7 @@ Data sorting tool for forensic memory analysis
 Based on volatility commands, Tr1ag3 is a python tool that helps you to retrieve information at the beginning of a forensic memory analysis.
 It requires a memory dump file as an input. 
 It creates text files as outputs named after the volatility command in a folder named "tr1ag3-output".
+As of now, it only works for Windows memory dump.
 
 # Requirements
 
